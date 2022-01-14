@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 
 public class Editor {
-    String name;
+    private String name;
     ArrayList<User> usuarios;
     int countuser = 0;
     ArrayList<Docs> documentos;
@@ -38,12 +38,6 @@ public class Editor {
                 if (pass.equals(this.usuarios.get(i).GetPass())){
                     return true;
                 }
-                else{
-                    return false;
-                }
-            }
-            else{
-                return false;
             }
         }
         return false;
@@ -81,4 +75,11 @@ public class Editor {
         }
         return  false;
     }
+
+    public void create(String namedoc, String contentdocs){
+        Docs ndoc = new Docs(this.countdoc, namedoc, contentdocs, this.activo);
+        this.documentos.add(ndoc);
+    }
+
+    public void share(String )
 }

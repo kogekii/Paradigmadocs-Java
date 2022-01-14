@@ -6,14 +6,14 @@ public class User {
     private int ID;
     private String Username;
     private String Pass;
-    private ArrayList<Integer> docs;
+    //private ArrayList<Docs> docs;
 
 
     public User(int ID, String name, String pass) {
         this.ID = ID;
         this.Username = name;
         this.Pass = pass;
-        this.docs = new ArrayList<>();
+        //this.docs = new ArrayList<>();
     }
 
     public String GetUser(){

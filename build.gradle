@@ -1,5 +1,11 @@
 plugins {
     id 'java'
+    id 'groovy'
+}
+jar{
+    manifest (({
+        attributes 'Main-Class': 'Proyectolab3.App'
+    } as groovy.lang.Closure<?>))
 }
 
 group 'org.example'
@@ -17,3 +23,4 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+

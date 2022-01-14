@@ -43,6 +43,7 @@ public class App {
                         boolean out = false;
                         while(!out) {
                             int loption;
+                            System.out.println("Sesion iniciada usuario: "+ Username);
                             System.out.println("1. Crear documento");
                             System.out.println("2. Compartir documento");
                             System.out.println("3. Agregar contenido a un documento");
@@ -56,7 +57,12 @@ public class App {
                             loption = lo.nextInt();
                             switch (loption) {
                                 case 1:
-                                    System.out.println("Crear documento");
+                                    System.out.println("Ingrese el nombre del documento: ");
+                                    String namedoc = sc.nextLine();
+                                    System.out.println("Ingrese el contenido del documento: ");
+                                    String contentdoc = sc.nextLine();
+                                    p.create(namedoc, contentdoc);
+                                    System.out.println("Documento creado con exito!");
                                     break;
                                 case 2:
                                     System.out.println("Compartir documento");
@@ -85,6 +91,8 @@ public class App {
 
                             }
                         }
+                    }else{
+                        System.out.println("Usuario o contraseña incorrectas");
                     }
                     break;
                 case 3:
