@@ -6,9 +6,7 @@ import java.util.ArrayList;
 public class Editor {
     private String name;
     private ArrayList<User> usuarios;
-    //private int countuser = 0;
     private ArrayList<Docs> documentos;
-    //private int countdoc = 0;
     private User activo;
     private Fecha creacion;
 
@@ -101,16 +99,20 @@ public class Editor {
         this.documentos.add(ndoc);
         this.activo.ndocs(ndoc.GetID());
     }
-    public boolean share(int iddoc, String acces, String usuario) {
+    public boolean share(int iddoc, String usuario, String acces) {
         if (this.activo.verificar_permisos("any", iddoc)){
-            if ("W".equals(acces) || "R".equals(acces) || "C".equals(acces)) {
+            if (acces.equals("W") || acces.equals("R") || acces.equals("C")) {
                 if (buscar_usuario(usuario)) {
-                    Permisos Pdoc = new Permisos(usuario, acces);
-                    this.documentos.get(iddoc).Setpermisos(Pdoc);
-                    return true;
+                    if (this.documentos.get(iddoc).agregarpermiso(usuario, acces)){
+                        this.Retornar_usuario(usuario).ndocs(this.documentos.get(iddoc).GetID());
+                        return true;
+                    }
+                    return false;
+
                 }
                 return false;
             }
+            return false;
         }
         return  false;
     }

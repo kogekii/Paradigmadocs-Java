@@ -36,7 +36,7 @@ public class User {
 
     public boolean verificar_permisos(String permise, int iddoc){
         if (permise.equals("any")){
-            for (int i = 0; i < this.docs.size(); i ++){
+            for (int i = 0; i < this.docs.size(); i++){
                 if (iddoc == this.docs.get(i)){
                     return true;
                 }

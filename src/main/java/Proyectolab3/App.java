@@ -13,6 +13,7 @@ public class App {
         Editor p = new Editor();
         p.Crear_plataforma(platformname, 7, 1, 2022);
         p.Register("andy", "hola123");
+        p.Register("naya", "hola123");
         while(!salir){
 
             System.out.println("1. Registrar un usuario");
@@ -65,7 +66,6 @@ public class App {
                                     String contentdoc = sc.nextLine();
                                     p.create(namedoc, contentdoc);
                                     System.out.println("Documento creado con exito!");
-
                                     break;
                                 case 2:
                                     System.out.println("indique el documento: ");
