@@ -3,11 +3,11 @@ package Proyectolab3;
 import java.util.ArrayList;
 
 public class Permisos {
-    User user;
-    String acces;
+    private String user;
+    private String acces;
 
 
-    public Permisos(User u, String acces){
+    public Permisos(String u, String acces){
         this.user = u;
         this.acces = acces;
     }

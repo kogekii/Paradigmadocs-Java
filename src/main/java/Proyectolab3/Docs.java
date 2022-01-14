@@ -2,13 +2,13 @@ package Proyectolab3;
 import java.util.ArrayList;
 
 public class Docs {
-    int ID;
-    String namedoc;
-    String textdoc;
-    Fecha creacion;
-    Fecha modificacion;
+    public String namedoc;
+    private int ID;
+    private String textdoc;
+    //Fecha creacion;
+    //Fecha modificacion;
     String creador;
-    ArrayList<Permisos> permisos;
+    private ArrayList<Permisos> permisos;
     //ArrayList<Integer> oldverions;
 
     public Docs(int ID, String docname, String contentdoc, User creator){
@@ -19,12 +19,33 @@ public class Docs {
         //this.modificacion = datedoc;
         this.creador = creator.GetUser();
         permisos = new ArrayList<>();
-        Permisos npR = new Permisos(creator, "R");
-        Permisos npW = new Permisos(creator, "W");
-        Permisos npC = new Permisos(creator, "C");
+        Permisos npR = new Permisos(creator.GetUser(), "R");
+        Permisos npW = new Permisos(creator.GetUser(), "W");
+        Permisos npC = new Permisos(creator.GetUser(), "C");
         permisos.add(npR);
         permisos.add(npC);
         permisos.add(npW);
 
+    }
+
+
+    public int GetID(){
+        return ID;
+    }
+    public  String Getdocname(){return namedoc;}
+    public String Gettextdoc(){
+        return textdoc;
+    }
+
+    public void Settextdoc(String text){
+        this.textdoc = text;
+    }
+
+    public ArrayList<Permisos> Getpermisos(){
+        return permisos;
+    }
+
+    public void Setpermisos(Permisos p){
+        this.permisos.add(p);
     }
 }

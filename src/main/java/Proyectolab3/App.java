@@ -12,11 +12,13 @@ public class App {
         String platformname = sc.nextLine();
         Editor p = new Editor();
         p.Crear_plataforma(platformname, 7, 1, 2022);
+        p.Register("andy", "hola123");
         while(!salir){
 
             System.out.println("1. Registrar un usuario");
             System.out.println("2. Iniciar sesion");
-            System.out.println("3. Salir");
+            System.out.println("3. Visualizar documentos");
+            System.out.println("4. Salir");
             Scanner op = new Scanner(System.in);
             System.out.println("Introduzca la operacion: ");
             int opcion = op.nextInt();
@@ -50,7 +52,7 @@ public class App {
                             System.out.println("4. Restaurar version de un documento");
                             System.out.println("5. Revocar acceso a un documento");
                             System.out.println("6. Buscar en los documentos");
-                            System.out.println("7. Visualizar docuementos");
+                            System.out.println("7. Visualizar documentos");
                             System.out.println("8. Cerrar sesion");
                             Scanner lo = new Scanner(System.in);
                             System.out.println("Introduzca la operacion: ");
@@ -63,9 +65,21 @@ public class App {
                                     String contentdoc = sc.nextLine();
                                     p.create(namedoc, contentdoc);
                                     System.out.println("Documento creado con exito!");
+
                                     break;
                                 case 2:
-                                    System.out.println("Compartir documento");
+                                    System.out.println("indique el documento: ");
+                                    int id = sc.nextInt();
+                                    sc.nextLine();
+                                    System.out.println("a quien quieres compartir este documento?: ");
+                                    String shareuser = sc.nextLine();
+                                    System.out.println("asigne el permiso (W,R,C): ");
+                                    String acces = sc.nextLine();
+                                    if (p.share(id, shareuser, acces)){
+                                        System.out.println("permiso asignado con exito");
+                                    }else{
+                                        System.out.println("permiso no asignado");
+                                    }
                                     break;
                                 case 3:
                                     System.out.println("Agregar contenido a un documento");
@@ -80,11 +94,12 @@ public class App {
                                     System.out.println("Buscar en los documentos");
                                     break;
                                 case 7:
-                                    System.out.println("Visualizar docuementos");
+                                    System.out.println("Visualizar documentos");
                                     break;
                                 case 8:
                                     System.out.println("Cerrar sesion");
                                     out = true;
+                                    p.logout();
                                     break;
                                 default:
                                     System.out.println("opcion no valida");
@@ -96,6 +111,9 @@ public class App {
                     }
                     break;
                 case 3:
+                    System.out.println("Visualizar documentos");
+                    break;
+                case 4:
                     salir = true;
                     break;
                 default:
