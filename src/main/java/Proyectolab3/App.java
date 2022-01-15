@@ -82,7 +82,16 @@ public class App {
                                     }
                                     break;
                                 case 3:
-                                    System.out.println("Agregar contenido a un documento");
+                                    System.out.println("Ingrese el ID del documento");
+                                    id = sc.nextInt();
+                                    sc.nextLine();
+                                    System.out.println("Ingrese el contenido nuevo");
+                                    contentdoc = sc.nextLine();
+                                    if (p.add(id, contentdoc, p)){
+                                        System.out.println("Contenido agregado con exito");
+                                    }else{
+                                        System.out.println("Error al agregar el contenido");
+                                    }
                                     break;
                                 case 4:
                                     System.out.println("Restaurar version de un documento");

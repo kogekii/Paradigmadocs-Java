@@ -1,7 +1,8 @@
 package Proyectolab3;
+import javax.swing.tree.DefaultTreeCellEditor;
 import java.util.ArrayList;
 
-public class User {
+public class User extends Editor{
     //Atributos
     private int ID;
     private String Username;
@@ -34,7 +35,7 @@ public class User {
         return (docs);
     }
 
-    public boolean verificar_permisos(String permise, int iddoc){
+    public boolean verificar_permisos(String permise, int iddoc, Editor p){
         if (permise.equals("any")){
             for (int i = 0; i < this.docs.size(); i++){
                 if (iddoc == this.docs.get(i)){
@@ -42,6 +43,21 @@ public class User {
                 }
             }
             return false;
+        }else if(permise.equals("W")){
+            for (int i = 0; i < this.docs.size(); i++){
+                if (iddoc == this.docs.get(i)) {
+                    for (int j = 0; i < p.retornar_doc(iddoc).Getpermisos().size(); j++){
+                        if (p.getActivo().GetUser().equals(p.retornar_doc(iddoc).Getpermisos().get(j).Getuser())){
+                            if (p.retornar_doc(iddoc).Getpermisos().get(j).Getacces().contains("W")){
+                                return true;
+                            }
+                            return  false;
+
+                        }
+                    }
+                    return false;
+                }
+            }
         }
         return false;
     }

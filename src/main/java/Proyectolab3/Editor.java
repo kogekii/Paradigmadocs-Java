@@ -100,7 +100,7 @@ public class Editor {
         this.activo.ndocs(ndoc.GetID());
     }
     public boolean share(int iddoc, String usuario, String acces) {
-        if (this.activo.verificar_permisos("any", iddoc)){
+        if (this.activo.verificar_permisos("any", iddoc, null)){
             if (acces.equals("W") || acces.equals("R") || acces.equals("C")) {
                 if (buscar_usuario(usuario)) {
                     if (this.documentos.get(iddoc).agregarpermiso(usuario, acces)){
@@ -108,7 +108,6 @@ public class Editor {
                         return true;
                     }
                     return false;
-
                 }
                 return false;
             }
@@ -117,6 +116,14 @@ public class Editor {
         return  false;
     }
 
-
+    public boolean add (int iddoc, String newtext, Editor p){
+        if (this.activo.verificar_permisos("W", iddoc, p)){
+            String oldtext = this.documentos.get(iddoc).Gettextdoc();
+            String New = oldtext + " " + newtext;
+            this.documentos.get(iddoc).Settextdoc(New);
+            return true;
+        }
+        return false;
+    }
 
 }
