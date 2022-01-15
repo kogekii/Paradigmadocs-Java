@@ -126,4 +126,29 @@ public class Editor {
         return false;
     }
 
+    public String visualize(){
+        if (this.activo != null){
+            String namedocs;
+            String content;
+
+            String doc = String.valueOf(this.activo.GetID()) + " " +this.activo.GetUser() + "\n";
+            for (int i = 0; i < this.activo.Getdocuments().size(); i++){
+                namedocs = "*"+retornar_doc(this.activo.Getdocuments().get(i)).Getdocname();
+                content = " "+ retornar_doc(this.activo.Getdocuments().get(i)).Gettextdoc();
+                doc = doc + namedocs + content + "\n";
+            }
+            return doc;
+        }else{
+            String namedocs;
+            String content;
+            String doc = new String("");
+            for (int i = 0; i < this.documentos.size(); i++){
+                namedocs = "*"+this.documentos.get(i).Getdocname();
+                content = " "+ this.documentos.get(i).Gettextdoc();
+                doc = doc + namedocs + content + "\n";
+            }
+            return doc;
+        }
+    }
+
 }

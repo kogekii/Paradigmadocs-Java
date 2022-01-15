@@ -103,7 +103,7 @@ public class App {
                                     System.out.println("Buscar en los documentos");
                                     break;
                                 case 7:
-                                    System.out.println("Visualizar documentos");
+                                    System.out.println(p.visualize());
                                     break;
                                 case 8:
                                     System.out.println("Cerrar sesion");
@@ -120,7 +120,7 @@ public class App {
                     }
                     break;
                 case 3:
-                    System.out.println("Visualizar documentos");
+                    System.out.println(p.visualize());
                     break;
                 case 4:
                     salir = true;
