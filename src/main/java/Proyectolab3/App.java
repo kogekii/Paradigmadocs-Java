@@ -94,10 +94,27 @@ public class App {
                                     }
                                     break;
                                 case 4:
-                                    System.out.println("Restaurar version de un documento");
+                                    System.out.println("ingrese el id del documento");
+                                    id = sc.nextInt();
+                                    sc.nextLine();
+                                    System.out.println("ingrese version del documento a recuperar");
+                                    int idold = sc.nextInt();
+                                    sc.nextLine();
+                                    if (p.rollback(id, idold)){
+                                        System.out.println("Contenido restaurado con exito");
+                                    }else{
+                                        System.out.println("Contenido no restaurado");
+                                    }
                                     break;
                                 case 5:
-                                    System.out.println("Revocar acceso a un documento");
+                                    System.out.println("ingrese el id del documento");
+                                    id = sc.nextInt();
+                                    sc.nextLine();
+                                    if (p.revokeAccess(id)){
+                                        System.out.println("permisos revocados con exito");
+                                    }else{
+                                        System.out.println("permisos no revocados");
+                                    }
                                     break;
                                 case 6:
                                     System.out.println("Buscar en los documentos");

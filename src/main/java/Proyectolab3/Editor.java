@@ -1,14 +1,16 @@
 package Proyectolab3;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
 
-public class Editor {
+public class Editor{
     private String name;
     private ArrayList<User> usuarios;
     private ArrayList<Docs> documentos;
     private User activo;
     private Fecha creacion;
+
 
 
 
@@ -95,12 +97,12 @@ public class Editor {
     }
 
     public void create(String namedoc, String contentdocs){
-        Docs ndoc = new Docs(this.documentos.size(), namedoc, contentdocs, this.activo);
+        Docs ndoc = new Docs(this.documentos.size(), namedoc, contentdocs, this.activo, LocalDate.now());
         this.documentos.add(ndoc);
         this.activo.ndocs(ndoc.GetID());
     }
     public boolean share(int iddoc, String usuario, String acces) {
-        if (this.activo.verificar_permisos("any", iddoc, null)){
+        if ((this.activo.verificar_permisos("any", iddoc, null)) || (this.activo.GetUser().equals(this.documentos.get(iddoc).Getcreador()))){
             if (acces.equals("W") || acces.equals("R") || acces.equals("C")) {
                 if (buscar_usuario(usuario)) {
                     if (this.documentos.get(iddoc).agregarpermiso(usuario, acces)){
@@ -117,10 +119,31 @@ public class Editor {
     }
 
     public boolean add (int iddoc, String newtext, Editor p){
-        if (this.activo.verificar_permisos("W", iddoc, p)){
+        if ((this.activo.verificar_permisos("W", iddoc, p)) || (this.activo.GetUser().equals(this.documentos.get(iddoc).Getcreador()))){
+            String olddoc = this.documentos.get(iddoc).Gettextdoc();
+            this.documentos.get(iddoc).Getolddocs().add(olddoc);
             String oldtext = this.documentos.get(iddoc).Gettextdoc();
             String New = oldtext + " " + newtext;
             this.documentos.get(iddoc).Settextdoc(New);
+            this.documentos.get(iddoc).Setlocatime(LocalDate.now());
+            return true;
+        }
+        return false;
+    }
+    public boolean rollback(int iddoc, int idolddoc){
+        if (this.activo.GetUser().equals(this.documentos.get(iddoc).Getcreador())){
+            String old  = this.documentos.get(iddoc).Gettextdoc();
+            this.documentos.get(iddoc).Settextdoc(this.documentos.get(iddoc).Getolddocs().get(idolddoc));
+            this.documentos.get(iddoc).Getolddocs().remove(idolddoc);
+            this.documentos.get(iddoc).Getolddocs().add(old);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean revokeAccess (int iddoc){
+        if (this.activo.GetUser().equals(this.documentos.get(iddoc).Getcreador())){
+            this.documentos.get(iddoc).deleteallpermise();
             return true;
         }
         return false;

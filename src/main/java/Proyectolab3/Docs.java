@@ -1,28 +1,27 @@
 package Proyectolab3;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Docs {
+public class Docs{
     public String namedoc;
     private int ID;
     private String textdoc;
-    //Fecha creacion;
-    //Fecha modificacion;
+    private LocalDate creacion;
+    private LocalDate modificacion;
     private String creador;
     private ArrayList<Permisos> permisos;
-    //ArrayList<Integer> oldverions;
+    private ArrayList<String> oldversions;
 
-    public Docs(int ID, String docname, String contentdoc, User creator){
+
+
+    public Docs(int ID, String docname, String contentdoc, User creator, LocalDate now){
         this.ID = ID;
         this.namedoc = docname;
         this.textdoc = contentdoc;
-        //this.creacion = datedoc;
-        //this.modificacion = datedoc;
+        this.creacion = now;
         this.creador = creator.GetUser();
         permisos = new ArrayList<>();
-        agregarpermiso(this.creador, "W");
-        agregarpermiso(this.creador, "R");
-        agregarpermiso(this.creador, "C");
-
+        this.oldversions = new ArrayList<>();
     }
 
 
@@ -33,11 +32,11 @@ public class Docs {
     public String Gettextdoc(){
         return textdoc;
     }
-
+    public String Getcreador() {return creador;}
     public void Settextdoc(String text){
         this.textdoc = text;
     }
-
+    public void Setlocatime(LocalDate time){this.modificacion = time;}
     public ArrayList<Permisos> Getpermisos(){
         return permisos;
     }
@@ -86,6 +85,13 @@ public class Docs {
             agregarpermiso(u,acces);
             return true;
         }
+    }
+    public void deleteallpermise(){
+        this.permisos.clear();
+    }
+
+    public ArrayList<String> Getolddocs(){
+        return oldversions;
     }
 
 
