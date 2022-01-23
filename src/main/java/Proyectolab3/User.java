@@ -1,8 +1,7 @@
 package Proyectolab3;
-import javax.swing.tree.DefaultTreeCellEditor;
 import java.util.ArrayList;
 
-public class User extends Editor{
+public class User extends Paradigmadocs {
     //Atributos
     private int ID;
     private String Username;
@@ -35,7 +34,7 @@ public class User extends Editor{
         return (docs);
     }
 
-    public boolean verificar_permisos(String permise, int iddoc, Editor p){
+    public boolean verificar_permisos(String permise, int iddoc, Paradigmadocs p){
         if (permise.equals("any")){
             for (int i = 0; i < this.docs.size(); i++){
                 if (iddoc == this.docs.get(i)){

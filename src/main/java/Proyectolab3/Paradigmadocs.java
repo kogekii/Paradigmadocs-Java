@@ -4,23 +4,21 @@ import java.util.ArrayList;
 
 
 
-public class Editor{
+public class Paradigmadocs {
     private String name;
-    private ArrayList<User> usuarios;
+    ArrayList<User> usuarios;
     private ArrayList<Docs> documentos;
     private User activo;
-    private Fecha creacion;
+    private LocalDate creacion;
 
 
 
 
-    public void Crear_plataforma(String name, int day, int month, int year){
+    public void Crear_plataforma(String name){
         this.name = name;
         this.usuarios = new ArrayList<>();
         this.documentos = new ArrayList<>();
-        Fecha date = new Fecha();
-        date.Crear_fecha(day, month, year);
-        this.creacion = date;
+        this.creacion = LocalDate.now();
     }
 
     public User getActivo() {
@@ -36,16 +34,14 @@ public class Editor{
         return false;
     }
 
-    public boolean buscar_documento(int id){
-        for (int i = 0; i < this.documentos.size() ; i++){
-            if (id == this.documentos.get(i).GetID()){
-                return true;
-            }
+    public boolean Validar_documento(int id){
+        if (this.documentos.size() < id){
+            return false;
         }
-        return false;
+        return true;
     }
 
-    public boolean verificar_credencial(String name, String pass){
+    public boolean authenticationnn(String name, String pass){
         for (int i = 0; i < this.usuarios.size() ; i++){
             if (name.equals(this.usuarios.get(i).GetUser())){
                 if (pass.equals(this.usuarios.get(i).GetPass())){
@@ -55,7 +51,14 @@ public class Editor{
         }
         return false;
     }
-
+    public boolean authentication(String name){
+        for (int i = 0; i < this.usuarios.size() ; i++){
+            if (name.equals(this.usuarios.get(i).GetUser())){
+                return false;
+            }
+        }
+        return true;
+    }
     public User Retornar_usuario(String name){
         if (buscar_usuario(name)){
             for (int i = 0; i < this.usuarios.size() ; i++){
@@ -77,7 +80,7 @@ public class Editor{
     }
 
     public boolean Register(String name, String pass){
-        if (!buscar_usuario(name)){
+        if (authentication(name)){
             User nuser = new User(this.usuarios.size(), name, pass);
             this.usuarios.add (nuser);
             return true;
@@ -86,7 +89,7 @@ public class Editor{
     }
 
     public boolean Login(String name, String pass){
-        if (verificar_credencial(name, pass)){
+        if (authenticationnn(name, pass)){
             this.activo = Retornar_usuario(name);
             return true;
         }
@@ -102,12 +105,15 @@ public class Editor{
         this.activo.ndocs(ndoc.GetID());
     }
     public boolean share(int iddoc, String usuario, String acces) {
-        if ((this.activo.verificar_permisos("any", iddoc, null)) || (this.activo.GetUser().equals(this.documentos.get(iddoc).Getcreador()))){
-            if (acces.equals("W") || acces.equals("R") || acces.equals("C")) {
-                if (buscar_usuario(usuario)) {
-                    if (this.documentos.get(iddoc).agregarpermiso(usuario, acces)){
-                        this.Retornar_usuario(usuario).ndocs(this.documentos.get(iddoc).GetID());
-                        return true;
+        if (this.Validar_documento(iddoc)) {
+            if ((this.activo.verificar_permisos("any", iddoc, null)) || (this.activo.GetUser().equals(this.documentos.get(iddoc).Getcreador()))) {
+                if (acces.equals("W") || acces.equals("R") || acces.equals("C")) {
+                    if (buscar_usuario(usuario)) {
+                        if (this.documentos.get(iddoc).agregarpermiso(usuario, acces)) {
+                            this.Retornar_usuario(usuario).ndocs(this.documentos.get(iddoc).GetID());
+                            return true;
+                        }
+                        return false;
                     }
                     return false;
                 }
@@ -115,27 +121,31 @@ public class Editor{
             }
             return false;
         }
-        return  false;
+        return false;
     }
 
-    public boolean add (int iddoc, String newtext, Editor p){
-        if ((this.activo.verificar_permisos("W", iddoc, p)) || (this.activo.GetUser().equals(this.documentos.get(iddoc).Getcreador()))){
-            String olddoc = this.documentos.get(iddoc).Gettextdoc();
-            this.documentos.get(iddoc).Getolddocs().add(olddoc);
-            String oldtext = this.documentos.get(iddoc).Gettextdoc();
-            String New = oldtext + " " + newtext;
-            this.documentos.get(iddoc).Settextdoc(New);
-            this.documentos.get(iddoc).Setlocatime(LocalDate.now());
-            return true;
+    public boolean add (int iddoc, String newtext, Paradigmadocs p) {
+        if (this.Validar_documento(iddoc)) {
+            if ((this.activo.verificar_permisos("W", iddoc, p)) || (this.activo.GetUser().equals(this.documentos.get(iddoc).Getcreador()))) {
+                String olddoc = this.documentos.get(iddoc).Gettextdoc();
+                this.documentos.get(iddoc).Getolddocs().add(olddoc);
+                String oldtext = this.documentos.get(iddoc).Gettextdoc();
+                String New = oldtext + " " + newtext;
+                this.documentos.get(iddoc).Settextdoc(New);
+                this.documentos.get(iddoc).Setlocatime(LocalDate.now());
+                return true;
+            }
+            return false;
         }
         return false;
     }
-    public boolean rollback(int iddoc, int idolddoc){
-        if (this.activo.GetUser().equals(this.documentos.get(iddoc).Getcreador())){
-            String old  = this.documentos.get(iddoc).Gettextdoc();
+    public boolean rollback(int iddoc, int idolddoc) {
+        if ((this.activo.GetUser().equals(this.documentos.get(iddoc).Getcreador())) && (this.Validar_documento(iddoc)) && (this.documentos.get(iddoc).validar_olddoc(idolddoc))) {
+            String old = this.documentos.get(iddoc).Gettextdoc();
             this.documentos.get(iddoc).Settextdoc(this.documentos.get(iddoc).Getolddocs().get(idolddoc));
             this.documentos.get(iddoc).Getolddocs().remove(idolddoc);
             this.documentos.get(iddoc).Getolddocs().add(old);
+            this.documentos.get(iddoc).Setlocatime(LocalDate.now());
             return true;
         }
         return false;
@@ -148,6 +158,20 @@ public class Editor{
         }
         return false;
     }
+    public void search (String frase, Paradigmadocs p){
+        for (int i = 0; i < this.documentos.size(); i++){
+            if ((this.activo.GetUser().equals(this.documentos.get(i).Getcreador())) || (this.activo.verificar_permisos("any", i, p))){
+                if (this.documentos.get(i).Gettextdoc().contains(frase)){
+                    System.out.print(this.documentos.get(i).GetID() );
+                    System.out.print(" ");
+                    System.out.print(this.documentos.get(i).Getdocname());
+                    System.out.print(" ");
+                    System.out.println(this.documentos.get(i).Gettextdoc());
+                }
+            }
+        }
+    }
+
 
     public String visualize(){
         if (this.activo != null){

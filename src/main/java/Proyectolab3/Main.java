@@ -1,8 +1,7 @@
 package Proyectolab3;
-//import java.util.ArrayList;
 import java.util.Scanner;
 
-public class App {
+public class Main {
     public static void main(String[] args){
 
         //Scanner sn = new Scanner(System.in);
@@ -10,10 +9,34 @@ public class App {
         System.out.println("Introduzca el nombre de la plataforma: ");
         Scanner sc = new Scanner(System.in);
         String platformname = sc.nextLine();
-        Editor p = new Editor();
-        p.Crear_plataforma(platformname, 7, 1, 2022);
-        p.Register("andy", "hola123");
-        p.Register("naya", "hola123");
+        Paradigmadocs p = new Paradigmadocs();
+        p.Crear_plataforma(platformname);
+        p.Register("user1", "pass1");
+        p.Register("user2", "pass2");
+        p.Register("user3", "pass3");
+        p.Register("user4", "pass4");
+        p.Register("user5", "pass5");
+        p.Login("user1", "pass1");
+        p.create("doc1", "documento 1");
+        p.create("doc2", "documento 2");
+        p.logout();
+        p.Login("user2", "pass2");
+        p.create("doc3", "documento 3");
+        p.create("doc4", "documento 4");
+        p.logout();
+        p.Login("user3", "pass3");
+        p.create("doc5", "documento 5");
+        p.create("doc6", "documento 6");
+        p.logout();
+        p.Login("user4", "pass4");
+        p.create("doc7", "documento 7");
+        p.create("doc8", "documento 8");
+        p.logout();
+        p.Login("user5", "pass5");
+        p.create("doc9", "documento 9");
+        p.create("doc10", "documento 10");
+        p.logout();
+
         while(!salir){
 
             System.out.println("1. Registrar un usuario");
@@ -117,7 +140,9 @@ public class App {
                                     }
                                     break;
                                 case 6:
-                                    System.out.println("Buscar en los documentos");
+                                    System.out.println("ingrese frase a buscar");
+                                    contentdoc = sc.nextLine();
+                                    p.search(contentdoc,p);
                                     break;
                                 case 7:
                                     System.out.println(p.visualize());
@@ -133,6 +158,7 @@ public class App {
                             }
                         }
                     }else{
+                        //System.out.println(p.usuarios.get(0).GetUser());
                         System.out.println("Usuario o contraseña incorrectas");
                     }
                     break;

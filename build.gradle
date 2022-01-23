@@ -1,26 +1,20 @@
-plugins {
-    id 'java'
-    id 'groovy'
-}
-jar{
-    manifest (({
-        attributes 'Main-Class': 'Proyectolab3.App'
-    } as groovy.lang.Closure<?>))
-}
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'application'
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+
+mainClassName = 'Proyectolab3.Main'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation     'junit:junit:4.13'
+}
+run{
+    standardInput = System.in
 }
 
-test {
-    useJUnitPlatform()
-}
+
 
