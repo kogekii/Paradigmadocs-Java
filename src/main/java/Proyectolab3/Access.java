@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class Access {
     private String user;
-    private ArrayList<String> acces;
+    private String acces;
 
     /**
      * crea un objeto de tipo acceso
@@ -14,38 +14,40 @@ public class Access {
      */
     public Access(String u){
         this.user = u;
-        this.acces = new ArrayList<>();
     }
 
     /**
-     * se encarga de actualizar el permiso en cuestion añadiendo nuevos al mismo usuario
+     * se encarga de actualizar el permiso a el usuario
      * @param permiso es el tipo de permiso a asignar
      */
     public void actualizar_permisos(String permiso){
-        this.acces.add(permiso);
+        this.acces = permiso;
     }
 
     /**
-     * Funcion que devuleve el nombre de usuario asociado a estos permisos
-     * @return devuleve el nombre de usuario asociado a estos permisos
+     * Metodo que devuleve el nombre de usuario asociado a este permiso
+     * @return devuleve el nombre de usuario asociado a este permiso
      */
     public String Getuser(){
         return user;
     }
 
     /**
-     * Funcion que devuelve el largo de la lista de permisos
-     * @return devuelve el largo de la lista de permisos
+     * Metodo que resulve si el permiso un acceso asignado
+     * @return true or false
      */
-    public Integer sizearray(){
-        return acces.size();
+    public boolean access_define(){
+        if (this.acces == null){
+            return true;
+        }
+        return false;
     }
 
     /**
-     * Funcion que devuelve la lista de permisos
-     * @return devuelve la lista de permisos
+     * Metodo que devuelve al acceso del permiso
+     * @return devuelve al acceso del permiso
      */
-    public  ArrayList<String> Getacces(){
+    public String Getacces(){
         return acces;
     }
 }

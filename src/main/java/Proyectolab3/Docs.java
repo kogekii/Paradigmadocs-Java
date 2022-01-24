@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Docs va a representar a un documento dentro de la plataforma de documentos
  */
 public class Docs{
-    public String namedoc;
+    private String namedoc;
     private int ID;
     private String textdoc;
     private LocalDate creacion;
@@ -35,7 +35,7 @@ public class Docs{
     }
 
     /**
-     * funcion que otorga el ID del documento
+     * Metodo que otorga el ID del documento
      * @return devuelve el ID del documento
      */
     public int GetID(){
@@ -43,7 +43,7 @@ public class Docs{
     }
 
     /**
-     *Funcion que devulve el nombre del documento
+     *Metodo que devulve el nombre del documento
      * @return devuelve el nombre del documento
      */
     public  String Getdocname(){
@@ -51,7 +51,7 @@ public class Docs{
     }
 
     /**
-     * Funcion que devuelve el contenido del documento
+     * Metodo que devuelve el contenido del documento
      * @return devuelve el contenido del documento
      */
     public String Gettextdoc(){
@@ -59,7 +59,7 @@ public class Docs{
     }
 
     /**
-     * Funcion que devuleve al creador del documento
+     * Metodo que devuleve al creador del documento
      * @return devuelve al creador del documento
      */
     public String Getcreador() {
@@ -67,7 +67,7 @@ public class Docs{
     }
 
     /**
-     * Funcion que devuelve la lista de permisos del documentto
+     * Metodo que devuelve la lista de permisos del documentto
      * @return devuelve la lista de permisos del documento
      */
     public ArrayList<Access> Getpermisos(){
@@ -75,7 +75,7 @@ public class Docs{
     }
 
     /**
-     * Funcion que devuleve la lista de IDs de versiones anteriores
+     * Metodo que devuleve la lista de IDs de versiones anteriores
      * @return devuleve lista de IDs de versiones anteriores
      */
     public ArrayList<String> Getolddocs(){
@@ -83,7 +83,7 @@ public class Docs{
     }
 
     /**
-     * Funcion que cambia el valor contenido en el atributo textdoc (contenido del documento)
+     * Metodo que cambia el valor contenido en el atributo textdoc (contenido del documento)
      * @param text nuevo contenido a asignar al documento
      */
     public void Settextdoc(String text){
@@ -91,7 +91,7 @@ public class Docs{
     }
 
     /**
-     * Funcion que reestablece la fecha de la ultima modificacion
+     * Metodo que reestablece la fecha de la ultima modificacion
      * @param time nueva fecha de modificacion
      */
     public void Setlocatime(LocalDate time){
@@ -100,7 +100,7 @@ public class Docs{
 
 
     /**
-     * Funcion que determina si un usuario tiene cualquier tipo de acceso a el documento
+     * Metodo que determina si un usuario tiene cualquier tipo de acceso a el documento
      * @param u nombre del usuario
      * @return true or false
      */
@@ -114,39 +114,37 @@ public class Docs{
     }
 
     /**
-     * Funcion que determina si los permisos de un usuario esta llenos (3 permisos maximos)
+     * Metodo que determina si el usuario ya tiene asignado permisos sobre el documento
      * @param u nombre del usuario
      * @return true or false
      */
     public boolean fullacces (String u) {
         for (int i = 0; i < this.permisos.size(); i++) {
-            if (u.equals(permisos.get(i).Getuser())){//compara si el nombre de usuario concuerda con el de la i posicion
-                if (permisos.get(i).sizearray() == 3){//compara si el metodo de la clase Acces "sizearray" es igual a 3
+            if (u.equals(permisos.get(i).Getuser())) {//compara si el nombre de usuario concuerda con el de la i posicion
+                if (permisos.get(i).access_define()) {
                     return true;
                 }
                 return false;
             }
+            return false;
         }
         return false;
     }
 
 
     /**
-     * Funcion que permite agregar permisos al documento
+     * Metodo que permite agregar permisos al documento
      * @param u nombre del usuario
-     * @param acces tipo de permiso a asignar
+     * @param access tipo de permiso a asignar
      * @return true or false
      */
-    public boolean agregarpermiso (String u, String acces){
+    public boolean agregarpermiso (String u, String access){
         if (this.userwithacces(u)){
-            if (!fullacces(u)) {
+            if (fullacces(u)) {
                 for (int i = 0; i < permisos.size(); i++) {
                     if (u.equals(permisos.get(i).Getuser())) {
-                        if (!permisos.get(i).Getacces().contains(acces)){
-                            permisos.get(i).actualizar_permisos(acces);
+                            permisos.get(i).actualizar_permisos(access);
                             return true;
-                        }
-                        return false;
                     }
                 }
                 return false;
@@ -155,20 +153,20 @@ public class Docs{
         }else{
             Access newacces = new Access(u);
             this.permisos.add(newacces);
-            agregarpermiso(u,acces);
+            agregarpermiso(u,access);
             return true;
         }
     }
 
     /**
-     * Funcion que borra todos los permisos asignados en el documento
+     * Metodo que borra todos los permisos asignados en el documento
      */
     public void deleteallpermise(){
         this.permisos.clear();
     }
 
     /**
-     * Funcion encargada de verificar si una version del documento existe
+     * Metodo encargada de verificar si una version del documento existe
      * @param idolddoc ID de la version antigua del documento
      * @return true or false
      */

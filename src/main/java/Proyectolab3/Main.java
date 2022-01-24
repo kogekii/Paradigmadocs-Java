@@ -1,16 +1,16 @@
 package Proyectolab3;
 import java.util.Scanner;
 
+/**
+ * clase creada para manejar el menu de la plataforma y sus interacciones
+ */
 public class Main {
     public static void main(String[] args){
-
-        //Scanner sn = new Scanner(System.in);
         boolean salir = false;
-        System.out.println("Introduzca el nombre de la plataforma: ");
         Scanner sc = new Scanner(System.in);
-        String platformname = sc.nextLine();
         Paradigmadocs p = new Paradigmadocs();
-        p.Crear_plataforma(platformname);
+        p.Crear_plataforma("PandaDocs");
+        //carga los parametros iniciales de la plataforma
         p.Register("user1", "pass1");
         p.Register("user2", "pass2");
         p.Register("user3", "pass3");
@@ -36,9 +36,9 @@ public class Main {
         p.create("doc9", "documento 9");
         p.create("doc10", "documento 10");
         p.logout();
-
+       //while utilizado para crear el menu de opciones
         while(!salir){
-
+            System.out.println(p.getname());
             System.out.println("1. Registrar un usuario");
             System.out.println("2. Iniciar sesion");
             System.out.println("3. Visualizar documentos");
@@ -46,7 +46,7 @@ public class Main {
             Scanner op = new Scanner(System.in);
             System.out.println("Introduzca la operacion: ");
             int opcion = op.nextInt();
-
+            //switch utilizado para menejar las opciones del menu
             switch(opcion){
                 case 1:
                     System.out.println("Introduzca el nombre de usuario: ");
@@ -67,8 +67,10 @@ public class Main {
                     Pass = sc.nextLine();
                     if (p.Login(Username, Pass)){
                         boolean out = false;
+                       //while utilizado para manejar el menu del usuario
                         while(!out) {
                             int loption;
+                            System.out.println(p.getname());
                             System.out.println("Sesion iniciada usuario: "+ Username);
                             System.out.println("1. Crear documento");
                             System.out.println("2. Compartir documento");
@@ -81,6 +83,7 @@ public class Main {
                             Scanner lo = new Scanner(System.in);
                             System.out.println("Introduzca la operacion: ");
                             loption = lo.nextInt();
+                            //switch utilizado para manejar las opciones del menu
                             switch (loption) {
                                 case 1:
                                     System.out.println("Ingrese el nombre del documento: ");
@@ -158,7 +161,6 @@ public class Main {
                             }
                         }
                     }else{
-                        //System.out.println(p.usuarios.get(0).GetUser());
                         System.out.println("Usuario o contraseña incorrectas");
                     }
                     break;
