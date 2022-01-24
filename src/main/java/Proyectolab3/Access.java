@@ -1,5 +1,4 @@
 package Proyectolab3;
-import java.util.ArrayList;
 
 /**
  * Clase de representar al permiso que posee cierto usuario dentro de un documento

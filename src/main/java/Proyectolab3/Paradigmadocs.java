@@ -272,30 +272,50 @@ public class Paradigmadocs {
         }
     }
 
-
-    public String visualize(){
-        if (this.activo != null){
-            String namedocs;
-            String content;
-
+    /**
+     * Metodo que convierte lo contenido en el paradigmadocs en un string
+     * @return un string del paradigmadocs
+     */
+    public String edittostring(){
+        if (this.activo != null){ //en el caso de que haya un usuario logeado
             String doc = String.valueOf(this.activo.GetID()) + " " +this.activo.GetUser() + "\n";
             for (int i = 0; i < this.activo.Getdocuments().size(); i++){
-                namedocs = "*"+retornar_doc(this.activo.Getdocuments().get(i)).Getdocname();
-                content = " "+ retornar_doc(this.activo.Getdocuments().get(i)).Gettextdoc();
-                doc = doc + namedocs + content + "\n";
+                doc = doc + "ID: " + retornar_doc(this.activo.Getdocuments().get(i)).GetID() + "\n";
+                doc  = doc + "Nombre del doc: " + retornar_doc(this.activo.Getdocuments().get(i)).Getdocname() + "\n";
+                doc  = doc + "contenido: " + retornar_doc(this.activo.Getdocuments().get(i)).Gettextdoc() + "\n";
+                doc = doc + "Creador: " + retornar_doc(this.activo.Getdocuments().get(i)).Getcreador() + "\n";
+                doc = doc + "cantidad de versiones: " + retornar_doc(this.activo.Getdocuments().get(i)).Getolddocs().size() + "\n";
+                doc = doc + "usuarios con acceso: " + retornar_doc(this.activo.Getdocuments().get(i)).accesstostring() + "\n";
+                doc = doc + "\n" + "---------------" + "\n";
             }
             return doc;
-        }else{
-            String namedocs;
-            String content;
+        }else{ // en el caso de que no haya ningun usuario logeado
             String doc = new String("");
             for (int i = 0; i < this.documentos.size(); i++){
-                namedocs = "*"+this.documentos.get(i).Getdocname();
-                content = " "+ this.documentos.get(i).Gettextdoc();
-                doc = doc + namedocs + content + "\n";
+                doc = doc + "ID: " + this.documentos.get(i).GetID() + "\n";
+                doc = doc + "nombre del doc: "+this.documentos.get(i).Getdocname() + "\n";
+                doc = doc + "contenido: "+ this.documentos.get(i).Gettextdoc() + "\n";
+                doc = doc + "Creador: " + this.documentos.get(i).Getcreador() + "\n";
+                doc = doc + "cantidad de versiones: " + this.documentos.get(i).Getolddocs().size() + "\n";
+                doc = doc + "\n" + "---------------" + "\n";
             }
             return doc;
         }
+    }
+
+    /**
+     * Metodo encargado de imprimir un string
+     * @param x string a imprimir
+     */
+    public void printtostring(String x){
+        System.out.println(x);
+    }
+
+    /**
+     * Metodo encargado de imprimir lo contenido en una plataforma de documentos
+     */
+    public void visualize(){
+        printtostring(edittostring());
     }
 
 }

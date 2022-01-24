@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d97914f0-f3cc-41a1-95ef-721a647cad96" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Proyectolab3/Access.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyectolab3/Access.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Proyectolab3/Docs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyectolab3/Docs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Proyectolab3/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyectolab3/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Proyectolab3/Paradigmadocs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyectolab3/Paradigmadocs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Proyectolab3/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyectolab3/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +94,9 @@
       <workItem from="1642953941225" duration="4297000" />
       <workItem from="1642959916204" duration="3096000" />
       <workItem from="1642982741437" duration="9415000" />
+      <workItem from="1643047230474" duration="2057000" />
+      <workItem from="1643049303375" duration="2000" />
+      <workItem from="1643049358119" duration="54000" />
     </task>
     <servers />
   </component>

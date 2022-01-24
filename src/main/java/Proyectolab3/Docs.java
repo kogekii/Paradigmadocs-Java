@@ -177,5 +177,16 @@ public class Docs{
         return true;
     }
 
+    /**
+     * Metodo que convierte la lista de permisos en un string
+     * @return la lista de permisos convertida en un string
+     */
+    public String accesstostring(){
+        String acces = "";
+        for (int i = 0; i < this.permisos.size(); i++){
+            acces = acces + this.permisos.get(i).Getuser() + ", ";
+        }
+        return  acces;
+    }
 }
 

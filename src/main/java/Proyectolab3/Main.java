@@ -148,7 +148,7 @@ public class Main {
                                     p.search(contentdoc,p);
                                     break;
                                 case 7:
-                                    System.out.println(p.visualize());
+                                    p.visualize();
                                     break;
                                 case 8:
                                     System.out.println("Cerrar sesion");
@@ -165,7 +165,7 @@ public class Main {
                     }
                     break;
                 case 3:
-                    System.out.println(p.visualize());
+                    p.visualize();
                     break;
                 case 4:
                     salir = true;
